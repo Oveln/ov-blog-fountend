@@ -17,9 +17,18 @@ getList()
 </script>
 
 <template>
-    <div>
+    <div class="article-list">
         <div v-for="article in list" :key="article.id">
             <ArticleCard :article="article"></ArticleCard>
         </div>
     </div>
 </template>
+
+<style scoped lang="scss">
+.article-list {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    place-content: center;
+}
+</style>
