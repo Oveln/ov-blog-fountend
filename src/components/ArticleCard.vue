@@ -17,7 +17,6 @@ import { useRouter } from 'vue-router';
 let router = useRouter();
 
 let jump = () => {
-    console.log("jump to " + props.article.id)
     router.push('/article/' + props.article.id)
 }
 

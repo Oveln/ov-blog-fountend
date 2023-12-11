@@ -44,7 +44,7 @@ let content = computed(() => {
         let md = MarkdownIt().use(markdownitLatex2img);
         return md.render(content);
     }
-    return "None"
+    return ""
 })
 
 
