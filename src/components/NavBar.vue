@@ -26,11 +26,11 @@ let overlayStyle = computed(() => {
 
 <template>
     <nav>
-        <div class="nav-item" :class="{actice: select === 0}" @click="onClick(0,'/')">
+        <div class="nav-item" :class="{active: select === 0}" @click="onClick(0,'/')">
           <House />
           <span>主页</span>
         </div>
-        <div class="nav-item" :class="{actice: select === 1}" @click="onClick(1,'/about')">
+        <div class="nav-item" :class="{active: select === 1}" @click="onClick(1,'/about')">
           <User />
           <span>关于</span>
         </div>
@@ -58,19 +58,32 @@ nav {
     place-content: center;
     padding: 5px 1rem;
     cursor: pointer;
-    :first-child {
+    svg {
       width: 50px;
+        transition: .3s;
     }
     transition: .3s;
     color: var(--color-text);
     span {
-      font-size: 0;
+      font-size: 12px;
       transition: .3s;
     }
-    //  .actice 或hover时
-    &.actice, &:hover {
+    &.active, &:hover {
       span {
-        font-size: 12px;
+        font-size: 0px;
+      }
+    }
+    &.active {
+      svg {
+        width: 55px;
+        // color: red;
+        transition: .3s;
+      }
+    }
+    &:hover {
+      svg {
+        width: 55px;
+        transition: .3s;
       }
     }
   }
