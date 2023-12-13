@@ -1,40 +1,43 @@
 <template>
-    <div class = "article">
+    <div class="article">
         <header>
             {{ article?.title }}
         </header>
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <main v-html="content"></main>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { Article } from '@/model/article';
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import MarkdownIt from 'markdown-it';
+import type { Article } from "@/model/article";
+import { computed, onBeforeMount, ref } from "vue";
+import { useRoute } from "vue-router";
+import MarkdownIt from "markdown-it";
 // @ts-ignore
-import markdownitLatex2img from 'markdown-it-latex2img'
+import markdownitLatex2img from "markdown-it-latex2img";
 
-let article = ref<Article>()
+let article = ref<Article>();
 const route = useRoute();
 
 async function getArticle(id: string) {
-    let res = await fetch(import.meta.env.VITE_API_BASEURL + '/article/' + id);
+    let res = await fetch(import.meta.env.VITE_API_BASEURL + "/article/" + id);
     let json = await res.json();
-    console.log(id)
-    console.log(json)
+    console.log(id);
+    console.log(json);
     if (json.code === 0) {
         article.value = json.data;
     }
     return null;
 }
 
-let id = route.params.id;
-// 如果id是string[],则取最后一个
-if (Array.isArray(id)) {
-    id = id[id.length - 1];
-}
-getArticle(id)
+onBeforeMount(() => {
+    let id = route.params.id;
+    // 如果id是string[],则取最后一个
+    if (Array.isArray(id)) {
+        id = id[id.length - 1];
+    }
+    getArticle(id);
+});
 
 let content = computed(() => {
     let content = article.value?.content;
@@ -44,12 +47,8 @@ let content = computed(() => {
         let md = MarkdownIt().use(markdownitLatex2img);
         return md.render(content);
     }
-    return ""
-})
-
-
-
-
+    return "";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -61,7 +60,6 @@ let content = computed(() => {
     margin: 10px 0;
     display: flex;
     flex-direction: column;
-
 }
 header {
     font-size: 24px;

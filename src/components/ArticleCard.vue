@@ -10,24 +10,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Article } from '@/model/article';
-import type { PropType } from 'vue';
-import { useRouter } from 'vue-router';
+import type { Article } from "@/model/article";
+import type { PropType } from "vue";
+import { useRouter } from "vue-router";
 
 let router = useRouter();
 
 let jump = () => {
-    router.push('/article/' + props.article.id)
-}
-
+    router.push("/article/" + props.article.id);
+};
 
 let props = defineProps({
     article: {
         type: Object as PropType<Article>,
         required: true
     }
-})
-
+});
 </script>
 
 <style lang="scss" scoped>
@@ -42,7 +40,6 @@ let props = defineProps({
     &:hover {
         border: 1px solid var(--color-border-hover);
     }
-
 }
 .article-title {
     font-size: 16px;

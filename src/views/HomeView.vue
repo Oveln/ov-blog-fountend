@@ -1,19 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { type Article } from '@/model/article';
-import ArticleCard from '@/components/ArticleCard.vue';
+import { onBeforeMount, onUnmounted, ref } from "vue";
+import { type Article } from "@/model/article";
+import ArticleCard from "@/components/ArticleCard.vue";
 
-let list = ref<Article[]>([])
+let list = ref<Article[]>([]);
 async function getList() {
-    let res = await fetch(import.meta.env.VITE_API_BASEURL + '/article/');
+    let res = await fetch(import.meta.env.VITE_API_BASEURL + "/article/");
     let json = await res.json();
-    console.log(json)
+    console.log(json);
     if (json.code === 0) {
-        list.value = json.data.list;
+        if (!(list.value === json.data.list)) {
+            list.value = json.data.list;
+            console.log("list updated");
+        }
     }
 }
-
-getList()
+let interval: number;
+onBeforeMount(() => {
+    getList();
+    interval = setInterval(getList, 1000 * 10);
+});
+onUnmounted(() => {
+    clearInterval(interval);
+});
 </script>
 
 <template>
