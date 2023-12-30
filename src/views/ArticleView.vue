@@ -20,10 +20,23 @@ let article = ref<Article>();
 const route = useRoute();
 
 async function getArticle(id: string) {
-    let res = await fetch(import.meta.env.VITE_API_BASEURL + "/article/" + id);
-    let json = await res.json();
-    console.log(id);
-    console.log(json);
+    // let res = await fetch(import.meta.env.VITE_API_BASEURL + "/article/" + id);
+    // let json = await res.json();
+    // console.log(id);
+    // console.log(json);
+    let json = {
+        code: 0,
+        msg: "success",
+        data: {
+            id: "6565d5a9b93ce3b4389e589d",
+            title: "test1",
+            content:
+                "# tips \n由于是提交上来的作业，所以并没有后端程序，这些文字都是前端缓存。\n# 文章支持 **Markdown**\n该版本代码在[github repo](https://github.com/Oveln/ov-blog-fountend)的homework branch中可以看到",
+            visible: true,
+            create_time: "2023-11-28 11:57:29.353 +00:00:00",
+            update_time: "2023-11-28 11:57:29.353 +00:00:00"
+        }
+    };
     if (json.code === 0) {
         article.value = json.data;
     }
