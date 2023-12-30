@@ -14,36 +14,36 @@ async function getList() {
     //         console.log("list updated");
     //     }
     // }
-    list.value = {
-        code: 0,
-        msg: "success",
-        data: {
-            list: [
-                {
-                    id: "6564752e0d6388a976e01e33",
-                    title: "你好",
-                    content: "this is second content",
-                    visible: true,
-                    create_time: "2023-11-27 10:53:34.157 +00:00:00",
-                    update_time: "2023-11-27 10:53:34.157 +00:00:00"
-                },
-                {
-                    id: "6565cb665b8efe5c69ff36ec",
-                    title: "测试文章1",
-                    content: "this is first content",
-                    visible: true,
-                    create_time: "2023-11-28 11:13:42.44 +00:00:00",
-                    update_time: "2023-11-28 11:13:42.44 +00:00:00"
-                }
-            ]
-        }
-    }.data.list;
 }
+list.value = {
+    code: 0,
+    msg: "success",
+    data: {
+        list: [
+            {
+                id: "6564752e0d6388a976e01e33",
+                title: "你好",
+                content: "this is second content",
+                visible: true,
+                create_time: "2023-11-27 10:53:34.157 +00:00:00",
+                update_time: "2023-11-27 10:53:34.157 +00:00:00"
+            },
+            {
+                id: "6565cb665b8efe5c69ff36ec",
+                title: "测试文章1",
+                content: "this is first content",
+                visible: true,
+                create_time: "2023-11-28 11:13:42.44 +00:00:00",
+                update_time: "2023-11-28 11:13:42.44 +00:00:00"
+            }
+        ]
+    }
+}.data.list;
 let interval: number;
-onBeforeMount(() => {
-    getList();
-    interval = setInterval(getList, 1000 * 10);
-});
+// onBeforeMount(() => {
+//     getList();
+//     interval = setInterval(getList, 1000 * 10);
+// });
 onUnmounted(() => {
     clearInterval(interval);
 });
